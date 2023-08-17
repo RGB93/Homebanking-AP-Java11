@@ -1,2 +1,39 @@
-package com.ap.homebanking.dto;public class ClientLoanDTO {
+package com.ap.homebanking.dto;
+
+import com.ap.homebanking.models.ClientLoan;
+
+public class ClientLoanDTO {
+    private Long id;
+    private Long loanId;
+    private String name;
+    private Double amount;
+    private Integer payments;
+
+    public ClientLoanDTO (ClientLoan clientLoan){
+        this.id = clientLoan.getId();
+        this.loanId = clientLoan.getLoan().getId();
+        this.name = clientLoan.getLoan().getName();
+        this.amount = clientLoan.getAmount();
+        this.payments = clientLoan.getPayments();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getLoanId() {
+        return loanId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public Integer getPayments() {
+        return payments;
+    }
 }

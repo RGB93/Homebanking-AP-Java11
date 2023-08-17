@@ -19,8 +19,8 @@ public class Account {
     private Double balance;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name ="holder_id")
-    private Client holder;
+    @JoinColumn(name ="client_id")
+    private Client client;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     Set<Transaction> transactions = new HashSet<>();
@@ -64,10 +64,10 @@ public class Account {
     }
 
     @JsonIgnore
-    public Client getHolder(){return holder;}
+    public Client getHolder(){return client;}
 
     public void setHolder(Client holder) {
-        this.holder = holder;
+        this.client = holder;
     }
 
     public Set<Transaction> getTransactions(){return transactions;}

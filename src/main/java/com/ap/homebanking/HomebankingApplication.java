@@ -132,6 +132,9 @@ public class HomebankingApplication {
 			cardRepository.save(card1);
 			cardRepository.save(card2);
 			cardRepository.save(card3);
+
+			Client client3 = new Client("admin", "admin","admin@admin",passwordEncoder.encode("321"));
+			clientRepository.save(client3);
 		};
     }
 

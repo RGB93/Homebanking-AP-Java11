@@ -21,12 +21,15 @@ public class WebAuthorization {
 
         http.authorizeRequests()
 
-                .antMatchers("/web/index.html", "/web/js/index.js", "/web/css/style.css",
-                        "/web/img/favicon.ico", "/web/img/mindhub.jpg", "/web/img/Mindhub-logo.png").permitAll()
-/*                .antMatchers(HttpMethod.POST, "/api/login").permitAll()*/
-                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+                .antMatchers("/web/index.html", "/web/js/**", "/web/css/**", "/web/img/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/login", "/api/clients", "/api/logout").permitAll()
+                .antMatchers("/api/clients/current", "/web/create-cards.html", "/web/cards.html",
+                        "/web/accounts.html", "api/clients/current/accounts").hasAnyAuthority("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "clients/current/cards", "/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/web/accounts.html", "/web/create-cards.html", "/web/cards.html").hasAuthority("CLIENT")
+                .antMatchers("/api/clients", "/api/accounts", "/api/accounts/{id}").hasAuthority("ADMIN")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/**").hasAuthority("CLIENT");
+                .antMatchers("/h2-console", "/rest/**").hasAuthority("ADMIN");
 
         http.formLogin()
 

@@ -24,21 +24,29 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
     private ClientRepository clientRepository;
+
     @RequestMapping("/accounts")
     public List<AccountDTO> getAccounts(){
         return accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
     }
+
     @RequestMapping("/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         return accountRepository.findById(id).map(AccountDTO::new).orElse(null);
     }
+
     @RequestMapping(path = "clients/current/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Object> register (Authentication authentication){
+    public ResponseEntity<Object> addAccount (Authentication authentication){
+
         Client client = clientRepository.findByEmail(authentication.getName());
+
         int numb1 = (int) ((Math.random() * (100000000 - 10000000)) + 10000000);
+
         String number = "VIN-" + numb1;
         LocalDate creationDate = LocalDate.now();
+
         double balance = 0.0;
+
         Account account = new Account(number, creationDate, balance);
 
         if (client != null) {
@@ -51,7 +59,6 @@ public class AccountController {
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
-
     }
 }
 

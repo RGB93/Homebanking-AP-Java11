@@ -8,4 +8,5 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface AccountRepository extends JpaRepository<Account, Long> {
+    Account findByNumber(String number);
 }

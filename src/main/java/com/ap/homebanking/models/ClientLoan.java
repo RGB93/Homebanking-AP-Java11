@@ -30,6 +30,9 @@ public class ClientLoan {
         this.loan = loan;
     }
 
+    public ClientLoan(Double amount20, Integer payments) {
+    }
+
     public Long getId() {
         return id;
     }

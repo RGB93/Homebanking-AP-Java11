@@ -1,0 +1,15 @@
+package com.ap.homebanking.services.implement;
+
+import com.ap.homebanking.models.ClientLoan;
+import com.ap.homebanking.repositories.ClientLoanRepository;
+import com.ap.homebanking.services.ClientLoanService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class ClientLoanServiceImplement implements ClientLoanService {
+    @Autowired
+    private ClientLoanRepository clientLoanRepository;
+    @Override
+    public void saveClientLoan(ClientLoan clientLoan) {
+
+    }
+}

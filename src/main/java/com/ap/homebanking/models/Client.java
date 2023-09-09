@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @Entity
 public class Client {
 
@@ -24,7 +26,7 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<ClientLoan> loans = new HashSet<>();
+    private Set<ClientLoan> clientLoans = new HashSet<>();
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     Set<Card> cards = new HashSet<>();
 
@@ -67,7 +69,7 @@ public class Client {
     public Set<Account> getAccounts() {
         return accounts;
     }
-    public  Set<ClientLoan> getClientLoans(){return loans;}
+    public  Set<ClientLoan> getClientLoans(){return clientLoans;}
     public Set<Card> getCards() {
         return cards;
     }
@@ -89,7 +91,7 @@ public class Client {
     }
     public void addClientsLoans(ClientLoan clientLoan){
         clientLoan.setClient(this);
-        loans.add(clientLoan);
+        clientLoans.add(clientLoan);
     }
     public void addCard (Card card) {
         card.setClient(this);
@@ -99,10 +101,13 @@ public class Client {
 
     @JsonIgnore
     public List<Loan>getLoans(){
-        return loans.stream().map(clientLoan -> clientLoan.getLoan()).collect(Collectors.toList());
+        return clientLoans.stream().map(ClientLoan::getLoan).collect(toList());
     }
 
 
-
+    public void addClientLoan (ClientLoan clientLoan) {
+        clientLoan.setClient(this);
+        clientLoans.add(clientLoan);
+    }
 }
 

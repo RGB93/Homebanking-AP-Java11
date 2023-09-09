@@ -63,8 +63,13 @@ public class Account {
         this.balance = balance;
     }
 
+
     @JsonIgnore
-    public Client getHolder(){return client;}
+    public Client getClient(){return client;}
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     public void setHolder(Client holder) {
         this.client = holder;

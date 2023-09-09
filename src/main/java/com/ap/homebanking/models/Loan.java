@@ -71,4 +71,5 @@ public class Loan {
     public List<Client> getClients(){
         return clients.stream().map(clientLoan -> clientLoan.getClient()).collect(Collectors.toList());
     }
+
 }
